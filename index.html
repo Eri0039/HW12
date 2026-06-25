@@ -1,244 +1,752 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Landing Page - Start Bootstrap Theme</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Navigation-->
-        <nav class="navbar navbar-light bg-light static-top">
-            <div class="container">
-                <a class="navbar-brand" href="#!">Start Bootstrap</a>
-                <a class="btn btn-primary" href="#signup">Sign Up</a>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Landing Page - Start Bootstrap Theme</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+<nav class="navbar navbar-light bg-light static-top position-relative">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand fw-bold text-secondary" href="#!">Start Bootstrap</a>
+
+        <div class="charge-container">
+            <button class="charge-btn" id="energyBtn">
+                <span class="btn-text">🌸 啟動粉紅充能</span>
+                <span class="btn-glow"></span>
+            </button>
+
+            <div class="progress-panel" id="progressPanel">
+                <div class="progress-bar-wrapper">
+                    <div class="charge-progress" id="chargeProgress"></div>
+                </div>
+                <div class="status-text" id="statusText">甜蜜充能中... <span id="percentNum">0%</span></div>
             </div>
-        </nav>
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container position-relative">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6">
-                        <div class="text-center text-white">
-                            <!-- Page heading-->
-                            <h1 class="mb-5">Generate more leads with a professional landing page!</h1>
-                            <!-- Signup form-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- * * SB Forms Contact Form * *-->
-                            <!-- * * * * * * * * * * * * * * *-->
-                            <!-- This form is pre-integrated with SB Forms.-->
-                            <!-- To make this form functional, sign up at-->
-                            <!-- https://startbootstrap.com/solution/contact-forms-->
-                            <!-- to get an API token!-->
-                            <form class="form-subscribe" id="contactForm" data-sb-form-api-token="API_TOKEN">
-                                <!-- Email address input-->
-                                <div class="row">
-                                    <div class="col">
-                                        <input class="form-control form-control-lg" id="emailAddress" type="email" placeholder="Email Address" data-sb-validations="required,email" />
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:required">Email Address is required.</div>
-                                        <div class="invalid-feedback text-white" data-sb-feedback="emailAddress:email">Email Address Email is not valid.</div>
-                                    </div>
-                                    <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
-                                </div>
-                                <!-- Submit success message-->
-                                <!---->
-                                <!-- This is what your users will see when the form-->
-                                <!-- has successfully submitted-->
-                                <div class="d-none" id="submitSuccessMessage">
-                                    <div class="text-center mb-3">
-                                        <div class="fw-bolder">Form submission successful!</div>
-                                        <p>To activate this form, sign up at</p>
-                                        <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                    </div>
-                                </div>
-                                <!-- Submit error message-->
-                                <!---->
-                                <!-- This is what your users will see when there is-->
-                                <!-- an error submitting the form-->
-                                <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                            </form>
+        </div>
+    </div>
+</nav>
+
+<style>
+    /* 1. 充能按鈕本體 */
+    .charge-container {
+        position: relative;
+        display: inline-block;
+    }
+
+    .charge-btn {
+        position: relative;
+        background: linear-gradient(135deg, #ff9a9e, #fecfef); /* 🌸 溫柔粉嫩漸層色 */
+        color: #fff;
+        border: none;
+        padding: 10px 24px;
+        font-weight: bold;
+        border-radius: 30px;
+        cursor: pointer;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+    /* 按鈕懸浮效果 */
+    .charge-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 154, 158, 0.6);
+    }
+
+    .charge-btn:active {
+        transform: translateY(1px);
+    }
+
+    /* 當點擊充能後，按鈕變成可愛的草莓牛奶色 */
+    .charge-btn.charging {
+        background: #fff0f2;
+        color: #ff758c;
+        border: 2px solid #ff9a9e;
+        pointer-events: none; /* 充能中不能重複點擊 */
+        box-shadow: 0 0 15px rgba(255, 154, 158, 0.2);
+    }
+
+    /* 2. 進度條面板（預設隱藏在按鈕下方） */
+    .progress-panel {
+        position: absolute;
+        top: 55px;
+        right: 0;
+        width: 220px;
+        background: rgba(255, 255, 255, 0.98); /* 改為乾淨的白底 */
+        padding: 12px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(255, 154, 158, 0.15); /* 粉色微陰影 */
+        border: 1px solid rgba(255, 154, 158, 0.3);
+
+        /* 核心動畫：預設收合、透明，滑順展現 */
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+        visibility: hidden;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 999;
+    }
+
+    /* 當啟動充能時，面板帥氣彈出 */
+    .progress-panel.show {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        visibility: visible;
+    }
+
+    /* 進度條外殼 */
+    .progress-bar-wrapper {
+        width: 100%;
+        height: 8px;
+        background: #ffe5e8; /* 淡粉色底槽 */
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 6px;
+    }
+
+    /* 進度條動態跑條 */
+    .charge-progress {
+        width: 0%; /* 由 JS 控制增加 */
+        height: 100%;
+        background: linear-gradient(90deg, #ff758c, #ff7eb3); /* 💕 亮眼花漾粉 */
+        box-shadow: 0 0 8px rgba(255, 117, 140, 0.5);
+        transition: width 0.1s linear;
+    }
+
+    /* 充能文字狀態 */
+    .status-text {
+        font-size: 12px;
+        color: #ff758c; /* 粉色字體 */
+        text-align: center;
+        font-weight: 500;
+    }
+</style>
+
+<script>
+    document.getElementById('energyBtn').addEventListener('click', function() {
+        const btn = this;
+        const btnText = btn.querySelector('.btn-text');
+        const panel = document.getElementById('progressPanel');
+        const progressBar = document.getElementById('chargeProgress');
+        const statusText = document.getElementById('statusText');
+
+        // 1. 讓按鈕和進度條進入「充能狀態」
+        btn.classList.add('charging');
+        btnText.innerText = "💗 CHARGING...";
+        panel.classList.add('show');
+
+        // 2. 初始化進度條數值
+        let width = 0;
+        progressBar.style.width = '0%';
+        statusText.innerHTML = `甜度注入中... <span id="percentNum">0%</span>`;
+
+        // 3. 設定計時器開始跑進度條
+        const interval = setInterval(function() {
+            if (width >= 100) {
+                clearInterval(interval);
+
+                // 🎉 4. 充能完畢的粉紅驚喜
+                progressBar.style.background = 'linear-gradient(90deg, #ff0844, #ffb199)'; // 變成更濃郁的戀愛紅粉
+                progressBar.style.boxShadow = '0 0 12px #ff0844';
+                statusText.innerHTML = `<span style="color: #ff0844; font-weight: bold;">💖 充能完畢！</span>`;
+                btnText.innerText = "✨ CHARGED!";
+
+                // 5. 兩秒後讓進度條收起來，並還原按鈕
+                setTimeout(function() {
+                    panel.classList.remove('show');
+                    setTimeout(() => {
+                        btn.classList.remove('charging');
+                        btnText.innerText = "🌸 啟動粉紅充能";
+                    }, 400);
+                }, 2000);
+
+            } else {
+                width += Math.floor(Math.random() * 5) + 2;
+                if (width > 100) width = 100;
+
+                progressBar.style.width = width + '%';
+                document.getElementById('percentNum').innerText = width + '%';
+            }
+        }, 80);
+    });
+</script>
+
+<<header class="masthead" style="height: 800px; background-position: 50% 30%; display: flex; align-items: center; padding: 0; overflow: hidden;">
+    <div class="container position-relative">
+        <div class="row justify-content-center">
+            <div class="col-xl-6">
+                <!-- 💡 1. 在這裡加上 scroll-animate 類別，並設定它的動畫為 formFadeInUp -->
+                <div class="text-center text-white scroll-animate" data-animation="formFadeInUp">
+                    <form class="form-subscribe" id="contactForm">
+                        <h1 class="mb-5"></h1>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <textarea class="form-control" id="userMessage" name="message" rows="2.5" placeholder="留下一句話吧..." required style="resize: none;"></textarea>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <button class="btn btn-primary btn-lg px-3" id="submitButton" type="submit">送出留言</button>
+                            </div>
+                        </div>
+
+                        <div id="jokeMessage" class="text-center mt-3 text-warning fw-bold fs-5" style="display: none;">
+                            😜 騙你的！這個只是裝飾。
+                        </div>
+                    </form>
+
+                    <script>
+                        document.getElementById('contactForm').addEventListener('submit', function(event) {
+                            event.preventDefault();
+
+                            const jokeText = document.getElementById('jokeMessage');
+                            jokeText.style.display = 'block';
+
+                            document.getElementById('userMessage').value = '';
+                        });
+                    </script>
                 </div>
             </div>
-        </header>
+        </div>
+    </div>
+</header>
+<style>
+    /* 預設沒滑到時：表單先隱藏並往下偏 30px */
+    .scroll-animate[data-animation="formFadeInUp"] {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: transform 1s cubic-bezier(0.1, 0.8, 0.3, 1), opacity 1s ease;
+    }
+
+    /* 💡 當每次滑到、被加上 .active 類別時：觸發流暢的升起與淡入效果 */
+    .scroll-animate[data-animation="formFadeInUp"].active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
         <!-- Icons Grid-->
-        <section class="features-icons bg-light text-center">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="bi-window m-auto text-primary"></i></div>
-                            <h3>Fully Responsive</h3>
-                            <p class="lead mb-0">This theme will look great on any device, no matter the size!</p>
-                        </div>
+<section class="features-icons bg-light text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <a href="https://www.instagram.com/black.__.bb/" target="_blank" class="text-decoration-none text-dark">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex"><i class="bi-instagram m-auto text-danger"></i></div>
+                        <h3>Instagram</h3>
+                        <p class="lead mb-0">@black.__.bb</p>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="bi-layers m-auto text-primary"></i></div>
-                            <h3>Bootstrap 5 Ready</h3>
-                            <p class="lead mb-0">Featuring the latest build of the new Bootstrap 5 framework!</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="features-icons-item mx-auto mb-0 mb-lg-3">
-                            <div class="features-icons-icon d-flex"><i class="bi-terminal m-auto text-primary"></i></div>
-                            <h3>Easy to Use</h3>
-                            <p class="lead mb-0">Ready to use with your own content, or customize the source files!</p>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
-        </section>
+
+            <div class="col-lg-4">
+                <a href="https://www.instagram.com/shusui_0309__/" target="_blank" class="text-decoration-none text-dark">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex"><i class="bi-instagram m-auto text-danger"></i></div>
+                        <h3>Instagram</h3>
+                        <p class="lead mb-0">@shusui_0309__</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-lg-4">
+                <a href="https://x.com/black_b39" target="_blank" class="text-decoration-none text-dark">
+                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                        <div class="features-icons-icon d-flex">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="m-auto text-dark" viewBox="0 0 16 16">
+                                <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                            </svg>
+                        </div>
+                        <h3>X</h3>
+                        <p class="lead mb-0">@black_b39</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
         <!-- Image Showcases-->
         <section class="showcase">
             <div class="container-fluid p-0">
                 <div class="row g-0">
-                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('assets/img/bg-showcase-1.jpg')"></div>
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('https://scontent-hkg1-1.cdninstagram.com/v/t51.75761-15/491896584_18038908826541572_3336436363788354692_n.webp?_nc_cat=109&ig_cache_key=MzYyMTQzNzkxNTM3ODgyMzMyOQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkZFRUQueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=mfPEObxLzRoQ7kNvwGfoFPf&_nc_oc=AdrzUJjYS24ETEUK9XDzxRWHzFCGk70Hb5RAX2xcG_7LWjQtEcUSl6wQD1gKl6OVk98&_nc_zt=23&_nc_ht=scontent-hkg1-1.cdninstagram.com&_nc_gid=0MLqzPUdL2dlFWDD7OBJug&_nc_ss=7baaf&oh=00_Af8XZBSe4RzHq_nz1VlqaqDa-LurQVV4mLsxPP7wLWnCtQ&oe=6A3F2E28'); background-size: cover; background-position: 50% 20%; min-height: 550px;"></div>
+
                     <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                        <h2>Fully Responsive Design</h2>
-                        <p class="lead mb-0">When you use a theme created by Start Bootstrap, you know that the theme will look great on any device, whether it's a phone, tablet, or desktop the page will behave responsively!</p>
+                        <h2>創作</h2>
+                        <p class="lead mb-0">專注於潮流日系風格插畫。從初期的靈感構思、線稿調整到最終的色彩堆疊，我試圖在二維的世界裡，賦予他們最真實的靈魂與故事。</p>
                     </div>
                 </div>
                 <div class="row g-0">
-                    <div class="col-lg-6 text-white showcase-img" style="background-image: url('assets/img/bg-showcase-2.jpg')"></div>
+                    <div class="col-lg-6 text-white showcase-img" style="background-image: url('https://www.hololive-dreams.com/_vercel/image?url=_astro%2Frhythm-thumb.D1px8XKy.jpg&w=3840&q=100'); background-size: cover; background-position: 50% 20%; min-height: 480px;"></div>
                     <div class="col-lg-6 my-auto showcase-text">
-                        <h2>Updated For Bootstrap 5</h2>
-                        <p class="lead mb-0">Newly improved, and full of great utility classes, Bootstrap 5 is leading the way in mobile responsive web development! All of the themes on Start Bootstrap are now using Bootstrap 5!</p>
+                        <h2>Vtuber</h2>
+                        <p class="lead mb-0">看著她們在舞台上閃閃發光的模樣，總能重新點燃我對創作與生活的熱情。那些歡笑與感動，是我日常裡不可或缺的精神糧食與靈感泉源!</p>
                     </div>
                 </div>
                 <div class="row g-0">
-                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('assets/img/bg-showcase-3.jpg')"></div>
+                    <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('https://i.pinimg.com/736x/51/37/68/513768bbb88265f4709ba0135d203cfb.jpg'); background-size: cover; background-position: 50% 20%; min-height: 480px;"></div>
                     <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-                        <h2>Easy to Use & Customize</h2>
-                        <p class="lead mb-0">Landing Page is just HTML and CSS with a splash of SCSS for users who demand some deeper customization options. Out of the box, just add your content and images, and your new landing page will be ready to go!</p>
+                        <h2>甘い&粉色</h2>
+                        <p class="lead mb-0">對粉紅色的偏愛，是生活中最溫柔的堅持。這些充滿少女心的色彩與甜美事物，不僅僅是視覺上的享受，更是疲憊日常裡的浪漫解藥，帶給我源源不絕的快樂與動力!</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Testimonials-->
+
+<section class="testimonials bg-light">
+    <div class="container py-5">
+        <h2 class="text-center mb-5">謝謝妳不離不棄，這輩子是分不開了♥</h2>
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-3 text-center mb-4 mb-lg-0">
+                <div class="testimonial-item mx-auto">
+                    <div class="ratio ratio-1x1 mx-auto mb-3" style="width: 220px; height: 200px; ">
+                        <img class="rounded-circle" src="https://scontent-hkg4-1.cdninstagram.com/v/t51.75761-15/495249460_18078542293789118_2299286928645008691_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=106&ig_cache_key=MzYyNDU0NTYyNzA3MTY5MjcxNg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuOTMzLnNkci5yZWd1bGFyX3Bob3RvLkMzIn0%3D&_nc_ohc=E4Y6LAjHo3sQ7kNvwEWon7_&_nc_oc=AdqFg3U-ep1ulfqsF1030rM3o_RM5-t_XyjuJuQd3-Y_vM7fKAtzRUeiF77vp2xyqis&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-hkg4-1.cdninstagram.com&_nc_gid=kqPpHlCE6WxkdW_ETWRhaA&_nc_ss=7a22e&oh=00_Af9Ap9wweG6yRhoh-muGqbI5RqlUsFH3YItWs_FuK3FK1g&oe=6A3F2078" alt="Margaret E." style="object-fit: cover; width: 100%; height: 100%;" />
+                    </div>
+                    <h5 class="fw-bolder mb-3" style="margin-right: 25px;">蔡珊鈺</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-5 mb-4 mb-lg-0">
+                <p class="lead mb-0 lh-lg fs-6 text-secondary text-start pe-lg-4" style="text-align: justify;">
+                    "從國中時的青澀到現在快要步入社會的大學階段，回頭看才發現我們竟然一起走了這麼久。這中間我們不是沒有過摩擦，經歷了無數次的磨合、誤會還有各自嘴硬的時刻，但每一次的爭執反而讓我們更懂得怎麼去珍惜對方。謝謝你一直都在，參與了我整段青春，也包容了我所有的不完美!"
+                </p>
+            </div>
+
+            <div class="col-lg-3 offset-lg-1">
+                <div class="d-flex flex-column gap-3">
+                    <img src="assets/img/nina01.jpg" alt="照片1" class= "img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover;">
+                    <img src="assets/img/nina02.jpg" alt="照片2" class="img-fluid rounded" style="width: 100%; height: 200px; object-fit: cover; object-position: 50% 40%;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
         <section class="testimonials text-center bg-light">
             <div class="container">
-                <h2 class="mb-5">What people are saying...</h2>
+                <h2 class="mb-5">我們的黑歷史已經累積得夠深厚了</h2>
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                            <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-1.jpg" alt="..." />
-                            <h5>Margaret E.</h5>
-                            <p class="font-weight-light mb-0">"This is fantastic! Thanks so much guys!"</p>
+                            <img class="img-fluid rounded-circle mb-3" src="https://scontent-hkg4-1.cdninstagram.com/v/t51.82787-15/670872115_18402768571199742_4190214648209420332_n.jpg?stp=dst-jpg_e35_p750x750_sh2.08_tt6&_nc_cat=108&ig_cache_key=Mzg3NDk4ODkzOTUzNTM3MDI5NQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=Q3R3nAnkklQQ7kNvwHrhrOa&_nc_oc=AdqpQFzwqW8UJsOmCUzVA9JklqPEzhLg50ZluiKdEdZoXZXcpypBRLlB-q6JEOnOxiA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-hkg4-1.cdninstagram.com&_nc_gid=i6B06O27b-GuB1GD8LaPTw&_nc_ss=7a22e&oh=00_Af9xl3PWZwnMeZF866fScSPppKZydc-FzjEdR3ARxfg8Dw&oe=6A3F28E9" style="width: 240px; height: 260px; object-fit: cover;">
+                            <h5>白宇翔</h5>
+                            <p class="font-weight-light mb-0">"遊戲主播試圖轉行顏職主播"</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                            <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-2.jpg" alt="..." />
-                            <h5>Fred S.</h5>
-                            <p class="font-weight-light mb-0">"Bootstrap is amazing. I've been using it to create lots of super nice landing pages."</p>
+                            <img class="img-fluid rounded-circle mb-3" src="https://scontent-hkg4-1.cdninstagram.com/v/t51.82787-15/724152821_18009094997923187_7283588912845000026_n.jpg?stp=dst-jpg_e35_p750x750_sh2.08_tt6&_nc_cat=108&ig_cache_key=MzkxOTM4Nzk3NzIwNjEyMjUxNQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMzA3Mi5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=qDRCUczW6_EQ7kNvwGXm1R2&_nc_oc=Ado9YeNtk70FRnPZv3Mx176RjGCxDC8WDhZaPIm8MhOcSpBdRJFOeapK1Vhv0S32j4o&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-hkg4-1.cdninstagram.com&_nc_gid=clWDVL4WOjAd8SFjCmTM5Q&_nc_ss=7a22e&oh=00_Af--K2RVwzN6xJcxrllBBoJSYYyiTOYXh7K9Y-wvhakh4Q&oe=6A3F1B98" style="width: 240px; height: 260px; object-fit: cover;">
+                            <h5>卓欣榆</h5>
+                            <p class="font-weight-light mb-0">"卓月日(顏職主播)"</p>
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="testimonial-item mx-auto mb-5 mb-lg-0">
-                            <img class="img-fluid rounded-circle mb-3" src="assets/img/testimonials-3.jpg" alt="..." />
-                            <h5>Sarah W.</h5>
-                            <p class="font-weight-light mb-0">"Thanks so much for making these free resources available to us!"</p>
+                            <img class="img-fluid rounded-circle mb-3" src="https://scontent-hkg4-2.cdninstagram.com/v/t51.82787-15/671212364_18096507094874643_2834643528164070793_n.heic?stp=dst-jpg_e35_p750x750_sh2.08_tt6&_nc_cat=111&ig_cache_key=Mzg3ODE2MDI4NDc1MDMzNzQ2MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=IzbHAPBclAkQ7kNvwE0b39C&_nc_oc=AdrYhzTao3nprf0tl6HLKW-Ab3c86NnZf-kConXEe3KnLj_86SH9BmmMdWe3QMjQJOc&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-hkg4-2.cdninstagram.com&_nc_gid=6wMjOHis6YDX7-zSZ_icsQ&_nc_ss=7a22e&oh=00_Af81gHwO_aLqJB6ISBIY04WHO2X1m2HbNWLwUt8UnBpwkg&oe=6A3F210B" style="width: 240px; height: 260px; object-fit: cover;">
+                            <h5>劉庭羽</h5>
+                            <p class="font-weight-light mb-0">"嗨!我是庭羽，我與世無爭"</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Call to Action-->
-        <section class="call-to-action text-white text-center" id="signup">
-            <div class="container position-relative">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6">
-                        <h2 class="mb-4">Ready to get started? Sign up now!</h2>
-                        <!-- Signup form-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- * * SB Forms Contact Form * *-->
-                        <!-- * * * * * * * * * * * * * * *-->
-                        <!-- This form is pre-integrated with SB Forms.-->
-                        <!-- To make this form functional, sign up at-->
-                        <!-- https://startbootstrap.com/solution/contact-forms-->
-                        <!-- to get an API token!-->
-                        <form class="form-subscribe" id="contactFormFooter" data-sb-form-api-token="API_TOKEN">
-                            <!-- Email address input-->
-                            <div class="row">
-                                <div class="col">
-                                    <input class="form-control form-control-lg" id="emailAddressBelow" type="email" placeholder="Email Address" data-sb-validations="required,email" />
-                                    <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:required">Email Address is required.</div>
-                                    <div class="invalid-feedback text-white" data-sb-feedback="emailAddressBelow:email">Email Address Email is not valid.</div>
-                                </div>
-                                <div class="col-auto"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
-                            </div>
-                            <!-- Submit success message-->
-                            <!---->
-                            <!-- This is what your users will see when the form-->
-                            <!-- has successfully submitted-->
-                            <div class="d-none" id="submitSuccessMessage">
-                                <div class="text-center mb-3">
-                                    <div class="fw-bolder">Form submission successful!</div>
-                                    <p>To activate this form, sign up at</p>
-                                    <a class="text-white" href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
-                                </div>
-                            </div>
-                            <!-- Submit error message-->
-                            <!---->
-                            <!-- This is what your users will see when there is-->
-                            <!-- an error submitting the form-->
-                            <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Footer-->
-        <footer class="footer bg-light">
+        <section class="testimonials text-center bg-light">
             <div class="container">
+                <h2 class="mb-5">時間在走，但老朋友的位置一直都在</h2>
                 <div class="row">
-                    <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-                        <ul class="list-inline mb-2">
-                            <li class="list-inline-item"><a href="#!">About</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Contact</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Terms of Use</a></li>
-                            <li class="list-inline-item">⋅</li>
-                            <li class="list-inline-item"><a href="#!">Privacy Policy</a></li>
-                        </ul>
-                        <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2023. All Rights Reserved.</p>
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid mb-3" src="https://scontent-hkg4-2.cdninstagram.com/v/t51.82787-15/514912118_18090159244634488_6742832648732367649_n.webp?_nc_cat=111&ig_cache_key=MzY2Nzg3ODA4OTg4MTI1MDIwMw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=FvII4Pk0OZoQ7kNvwHT1w8y&_nc_oc=AdoGYAczsjrtAsMHNJmmJ7PlvmbST1AdNI8uwaAFylJ8te_iVm22jYr7mumMEBjHR6A&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-hkg4-2.cdninstagram.com&_nc_gid=2Cp_Rso92nTaAETYTjrBNQ&_nc_ss=7a22e&oh=00_Af_-6OgW60K9ufEM6wRNd0tkfW_ii-POwryXodlXeOmljw&oe=6A3F35B9" style="width: 100%; height: 400px; object-fit: cover;">
+                            <h5>范姜宜希</h5>
+                            <p class="font-weight-light mb-0">"白沢嵐梟"</p>
+                        </div>
                     </div>
-                    <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
-                        <ul class="list-inline mb-0">
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-facebook fs-3"></i></a>
-                            </li>
-                            <li class="list-inline-item me-4">
-                                <a href="#!"><i class="bi-twitter fs-3"></i></a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="#!"><i class="bi-instagram fs-3"></i></a>
-                            </li>
-                        </ul>
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid mb-3" src="https://scontent-hkg4-1.xx.fbcdn.net/v/t39.30808-6/511268825_695965486661556_7011707913745320630_n.jpg?stp=dst-jpg_tt6&cstp=mx2048x1163&ctp=s2048x1163&_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_ohc=akHUo6d0NkIQ7kNvwFwfqeJ&_nc_oc=AdoIdAds5kLQULW_noaWAp9LySscXdPGDaSl0HEneZ2p3d5yCIRj9Yc2VY4smpZcMFg&_nc_zt=23&_nc_ht=scontent-hkg4-1.xx&_nc_gid=GIsdmNs6yUXluVsaaxiYvA&_nc_ss=7b2a8&oh=00_Af_1pr33GKMiVMjWGF-rN5BfTcDCS48smVFJNKJGeslBrw&oe=6A3F16F3" style="width: 400px; height: 400px; object-fit: cover;">
+                            <h5>葉紫嫣</h5>
+                            <p class="font-weight-light mb-0">"梨子"</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                            <img class="img-fluid mb-3" src="https://scontent-hkg1-2.xx.fbcdn.net/v/t39.30808-6/670274281_1832593494099783_9207249590325567855_n.jpg?stp=dst-jpg_tt6&cstp=mx1076x1075&ctp=s1076x1075&_nc_cat=107&ccb=1-7&_nc_sid=833d8c&_nc_ohc=jUB0vi6ndYUQ7kNvwHzwUSE&_nc_oc=AdpO1emV1rc_-hC9u2try4yFv7HNrlXezNphUswqbtF17sHqb2Iniv8Hx81M3fFSLnk&_nc_zt=23&_nc_ht=scontent-hkg1-2.xx&_nc_gid=RNa93wP39YWmnC_EI4gkDg&_nc_ss=7b2a8&oh=00_Af9hCc6NI7F4vhqxAG4Z_dxd4cmZ4SuYLE8uab94mPz53g&oe=6A3F26D1" style="width: 100%; height: 400px; object-fit: cover;">
+                            <h5>周囷芸</h5>
+                            <p class="font-weight-light mb-0">"萌音"</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+        </section>
+
+<!-- 💡 滿版背景大圖區塊開始 -->
+<<!-- 💡 滿版背景大圖區塊 -->
+<section class="full-bg-hero d-flex align-items-center justify-content-center">
+    <!-- 💡 改成用 scroll-animate 類別，並用 data-animation 指定要跑什麼動畫 -->
+    <div class="hero-background-image scroll-animate" data-animation="bgZoomIn"></div>
+
+    <!-- 💡 背景上的半透明深色遮罩（高度同步改為 80%） -->
+    <div class="hero-overlay"></div>
+
+    <!-- 💡 文字維持你調整好的 -150px 上調高度 -->
+    <div class="container position-relative z-index-2 text-center text-white">
+        <!-- 💡 這裡也改成滾動偵測類別 -->
+        <h1 class="display-4 fw-bold text-shadow scroll-animate" data-animation="textFade" style="margin-top: -150px">筆下創作角色</h1>
+    </div>
+</section>
+
+<style>
+    .full-bg-hero {
+        position: relative;
+        min-height: 100vh;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .hero-background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80%;
+        background-image: url('assets/img/001.jpg');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: 1;
+        opacity: 0; /* 💡 預設先隱藏，滑到才顯現 */
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: 2;
+    }
+
+    .z-index-2 {
+        z-index: 3;
+    }
+    .text-shadow {
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    /* 🎬 調整為：只有當 JavaScript 動態加上 .active 時才點燃動畫 */
+    @keyframes bgZoomIn {
+        from {
+            opacity: 0;
+            transform: scale(1.15);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    .scroll-animate[data-animation="bgZoomIn"].active {
+        animation: bgZoomIn 1.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+    }
+
+    @keyframes textFade {
+        from { opacity: 0; transform: translateY(20px); } /* 💡 微微向上浮現更有動感 */
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .scroll-animate[data-animation="textFade"].active {
+        animation: textFade 1.2s ease forwards;
+        animation-delay: 0.6s; /* 💡 背景放大到一半時文字再浮現，很有層次感 */
+    }
+</style>
+
+<section class="image-text-section py-5 bg-white">
+    <div class="container py-4">
+        <div class="row align-items-center">
+
+            <div class="col-lg-6 mb-4 mb-lg-0 scroll-animate" data-animation="slideInLeft">
+                <img src="assets/img/002.jpg" alt="精選圖片" class="img-fluid rounded shadow-sm" style="width: 100%; max-height: 450px; object-fit: cover;">
+            </div>
+
+            <div class="col-lg-5 offset-lg-1 scroll-animate" data-animation="slideInRight">
+                <h2 class="fw-bold mb-3 text-dark">筆下的第一個OC</h2>
+                <p class="lead fs-6 lh-lg text-secondary text-start" style="text-align: justify;">
+                    我的第一個 OC「黑菟御絲子」，是我國二那年和朋友一起創作的產物。那時候的我們總聚在一起編織世界，她也因此在朋友的角色故事裡，經歷了一段轟轟烈烈的跨生死戀情。隨著時間推移，雖然和當初的朋友失去了聯繫，但也正是從那時起，御絲子開始長出自己的血肉——她擁有了真正屬於自己的個性和世界觀，不再是誰的附屬，而是成為了一個完整的個體。
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="image-text-section py-5 bg-white">
+    <div class="container py-4">
+        <div class="row align-items-center">
+
+            <div class="col-lg-6 mb-4 mb-lg-0 scroll-animate"  data-animation="slideInLeft">
+                <img src="assets/img/003.png" alt="精選圖片" class="img-fluid rounded shadow-sm" style="width: 100%; max-height: 100%; object-fit: contain;">
+            </div>
+
+            <div class="col-lg-5 offset-lg-1 scroll-animate" data-animation="slideInRight">
+                <h2 class="fw-bold mb-3 text-dark" >黑菟御絲子</h2>
+                <p class="lead fs-6 lh-lg text-secondary text-start" style="text-align: justify;">
+                    活了上千年的黑菟御絲子擁有一頭內層染粉紅的及腰黑髮與招牌黑兔耳。她外表看似是個愛吃棒棒糖、開朗愛社交的 17 歲少女，實際上卻是個大喇喇、愛裝B、且極具野心的鬼才。她既有敢愛敢恨、與「白沢 嵐梟」跨越生死戀愛的純情花癡一面，也有脾氣火爆、記仇並熱衷惡趣味的惡魔性格。
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="image-text-section py-5 bg-white">
+    <div class="container py-4">
+        <div class="row align-items-center">
+
+            <div class="col-lg-6 mb-4 mb-lg-0 scroll-animate" data-animation="slideInLeft">
+                <img src="assets/img/005.png" alt="精選圖片" class="img-fluid rounded shadow-sm" style="height: 100%; max-height: 1000px; object-fit: cover;">
+            </div>
+
+            <div class="col-lg-5 offset-lg-1 scroll-animate" data-animation="slideInRight">
+                <h2 class="fw-bold mb-3 text-dark">蔓芽</h2>
+                <p class="lead fs-6 lh-lg text-secondary text-start" style="text-align: justify;">
+                    擁有海藍色與檸檬黃的代表色。一頭淺藍色雙辮髮和冷淡的黃色雙眸，加上她手中不離身的平板，展現出她對研究、使用 3C 和解謎的狂熱。她的個性既冷靜、反應快，又帶著「裝B」和「嗆聲」的特質，加上最關鍵的「小心眼」，是一個讓人無法忽視、個性鮮明的存在。
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>粉嫩系圖片無縫滾動展示（支援點擊放大）</title>
+    <style>
+        /* 🌸 頁面基礎設定（深字體、粉嫩底風格） */
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background-color: #fff5f6; /* 草莓牛奶粉白底 */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #212529; /* 絕對清晰的深碳黑字 */
+            text-align: center;
+        }
+
+        h2 {
+            color: #1a1516; /* 加深大標題 */
+            margin-bottom: 30px;
+        }
+
+        /* 🎀 滾動展示區的外框容器 */
+        .marquee-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #ffe5e8; /* 溫柔櫻花粉底色 */
+            border: 2px solid #ffd0d6; /* 蜜桃粉邊框 */
+            border-radius: 12px;
+            padding: 20px 0;
+            box-shadow: 0 4px 15px rgba(255, 117, 140, 0.1);
+        }
+
+        /* 🍓 滾動軌道 */
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 20s linear infinite;
+        }
+
+        /* 滑鼠移上去時自動暫停 */
+        .marquee-container:hover .marquee-track {
+            animation-play-state: paused;
+        }
+
+        /* 🖼️ 每張圖片的包裝外框 */
+        .image-item {
+            flex-shrink: 0;
+            margin: 0 15px;
+            text-align: center;
+        }
+
+        .image-item img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: block;
+            cursor: zoom-in; /* ⚡ 讓滑鼠移上去時變成「放大鏡」圖示，提示可以點擊 */
+            transition: transform 0.2s ease;
+        }
+
+        /* 滑鼠懸停在單張圖片上時稍微放大，增加互動感 */
+        .image-item img:hover {
+            transform: scale(1.05);
+        }
+
+        /* ✍️ 圖片說明文字 */
+        .image-caption {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #212529;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ==========================================
+           🔍 燈箱效果（Lightbox）CSS 核心
+           ========================================== */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75); /* 半透明黑背景，襯托作品 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* 確保在最上層 */
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        /* 當燈箱被激活時顯示 */
+        .lightbox-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* 燈箱內部放大後的圖片 */
+        .lightbox-img {
+            max-width: 85%;
+            max-height: 85%;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .lightbox-overlay.active .lightbox-img {
+            transform: scale(1); /* 彈出時有輕微放大的流暢動畫 */
+        }
+
+        /* 提示字：點擊任意處關閉 */
+        .lightbox-close-tip {
+            position: absolute;
+            bottom: 20px;
+            color: #fff;
+            font-size: 0.9rem;
+            background: rgba(0,0,0,0.5);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>🌸 我的作品集展示（點擊圖片放大） </h2>
+
+<div class="marquee-container">
+    <div class="marquee-track">
+
+        <div class="image-item">
+            <img src="assets/img/007.jpg" onclick="openLightbox(this.src)">
+            <div class="image-caption">作品名稱 1</div>
+        </div>
+        <div class="image-item">
+            <img src="assets/img/008.png" onclick="openLightbox(this.src)">
+            <div class="image-caption">作品名稱 2</div>
+        </div>
+        <div class="image-item">
+            <img src="assets/img/009.png" onclick="openLightbox(this.src)">
+            <div class="image-caption">作品名稱 3</div>
+        </div>
+        <div class="image-item">
+            <img src="assets/img/010.png" onclick="openLightbox(this.src)">
+            <div class="image-caption">作品名稱 4</div>
+        </div>
+
+        <div class="image-item">
+            <img src="assets/img/011.png" onclick="openLightbox(this.src)">
+            <div class="image-caption">作品名稱 1</div>
+        </div>
+        <div class="image-item">
+            <img src="assets/img/012.png" onclick="openLightbox(this.src)">
+            <div class="image-caption">作品名稱 2</div>
+        </div>
+        <div class="image-item">
+            <img src="assets/img/001.png" onclick="openLightbox(this.src)">
+            <div class="image-caption">作品名稱 3</div>
+        </div>
+        <div class="image-item">
+            <img src="assets/img/004.png" onclick="openLightbox(this.src)">
+            <div class="image-caption">作品名稱 4</div>
+        </div>
+        <div class="image-item">
+            <img src="assets/img/006.png" onclick="openLightbox(this.src)">
+            <div class="image-caption">作品名稱 4</div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <img class="lightbox-img" id="lightbox-target" src="" alt="放大圖">
+    <div class="lightbox-close-tip">點擊任意處關閉</div>
+</div>
+
+<script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxTarget = document.getElementById('lightbox-target');
+
+    // 打開燈箱並塞入被點擊的圖片網址
+    function openLightbox(imageSrc) {
+        lightboxTarget.src = imageSrc;
+        lightbox.classList.add('active');
+    }
+
+    // 關閉燈箱
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+    }
+</script>
+
+</body>
+</html>
+
+
+<!-- 💡 滾動偵測的 JavaScript 密碼（請確保這段在網頁最底端） -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // 當滑進畫面時：加上 active 觸發動畫
+                    entry.target.classList.add('active');
+                } else {
+                    // 💡 當滑出畫面（看不見）時：移除 active，讓它重置回原本狀態
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, { threshold: 0.15 }); // 當區塊在螢幕露出 15% 時觸發
+
+        const animatedElements = document.querySelectorAll('.scroll-animate');
+        animatedElements.forEach(el => observer.observe(el));
+    });
+</script>
     </body>
 </html>

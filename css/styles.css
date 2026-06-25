@@ -11,12 +11,12 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
-  --bs-blue: #0d6efd;
-  --bs-indigo: #6610f2;
-  --bs-purple: #6f42c1;
+  --bs-blue: #ffbcd8;
+  --bs-indigo: #ffbcd8;
+  --bs-purple: #ffbcd8;
   --bs-pink: #d63384;
-  --bs-red: #dc3545;
-  --bs-orange: #fd7e14;
+  --bs-red: #ffbcd8;
+  --bs-orange: #ffbcd8;
   --bs-yellow: #ffc107;
   --bs-green: #198754;
   --bs-teal: #20c997;
@@ -25,23 +25,27 @@
   --bs-white: #fff;
   --bs-gray: #6c757d;
   --bs-gray-dark: #343a40;
-  --bs-gray-100: #f8f9fa;
-  --bs-gray-200: #e9ecef;
-  --bs-gray-300: #dee2e6;
-  --bs-gray-400: #ced4da;
-  --bs-gray-500: #adb5bd;
+
+  /* 🥛 網頁元件的背景灰：改為白裡透紅的草莓牛奶白（原為灰色） */
+  --bs-gray-100: #fff5f6;
+  --bs-gray-200: #ffe5e8;
+  --bs-gray-300: #ffd0d6; /* 變成分隔線與邊框粉 */
+  --bs-gray-400: #ffb5be;
+  --bs-gray-500: #ffa1ac;
   --bs-gray-600: #6c757d;
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #0d6efd;
-  --bs-secondary: #6c757d;
-  --bs-success: #198754;
-  --bs-info: #0dcaf0;
-  --bs-warning: #ffc107;
-  --bs-danger: #dc3545;
-  --bs-light: #f8f9fa;
-  --bs-dark: #212529;
+
+  /* 🌟 【功能元件變數改裝】全面換上粉嫩色調，並確保字體能用深色搭配 */
+  --bs-primary: #ff758c;   /* 主要按鈕 -> 飽滿草莓粉 */
+  --bs-secondary: #fecfef; /* 次要按鈕 -> 浪漫泡泡紫粉 */
+  --bs-success: #ff9cc7;   /* 成功狀態 -> 柔美櫻花粉 */
+  --bs-info: #f0f3ff;      /* 提示狀態 -> 輕盈奶藍色 */
+  --bs-warning: #fffce6;   /* 警告狀態 -> 香草棉花糖黃 */
+  --bs-danger: #ffb5be;    /* 危險狀態 -> 果凍蜜桃粉 */
+  --bs-light: #fff5f6;     /* 淺色背景 -> 草莓牛奶白 */
+  --bs-dark: #2d2224;      /* 深色背景 -> 高級黑巧可可黑 */
   --bs-primary-rgb: 13, 110, 253;
   --bs-secondary-rgb: 108, 117, 125;
   --bs-success-rgb: 25, 135, 84;
@@ -61,22 +65,40 @@
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
-  --bs-body-color: #212529;
-  --bs-body-bg: #fff;
+
+  /* 🌟 核心保證：大範圍預設文字一律是用最清晰的深碳黑色 */
+  --bs-body-color: #ffbcd8;
+
+  /* 🌸 網頁大背景：直接幫你換成極淡、舒服的草莓歐蕾粉白底 */
+  --bs-body-bg: #fff5f6;
+
+  /* 🎀 網頁線條與邊框：全面改成浪漫的櫻花粉線條 */
   --bs-border-width: 1px;
   --bs-border-style: solid;
-  --bs-border-color: #dee2e6;
-  --bs-border-color-translucent: rgba(0, 0, 0, 0.175);
+  --bs-border-color: #ffd0d6;
+  --bs-border-color-translucent: rgba(255, 117, 140, 0.15);
+
   --bs-border-radius: 0.375rem;
   --bs-border-radius-sm: 0.25rem;
   --bs-border-radius-lg: 0.5rem;
   --bs-border-radius-xl: 1rem;
   --bs-border-radius-2xl: 2rem;
   --bs-border-radius-pill: 50rem;
-  --bs-link-color: #0d6efd;
-  --bs-link-hover-color: #0a58ca;
-  --bs-code-color: #d63384;
-  --bs-highlight-bg: #fff3cd;
+
+  /* 🔗 超連結：平常是明顯的深焙草莓紅，滑鼠移上去（Hover）直接變純黑，絕對看得清 */
+  --bs-link-color: #e6526f;
+  --bs-link-hover-color: #000000;
+
+  /* 💻 程式碼與高亮標籤：換成粉嫩色系搭配 */
+  --bs-code-color: #ff4e50;
+  --bs-highlight-bg: #ffe5e8;
+}
+
+/* 🎯 額外大絕招：強制修正像 image_826ee2.png 那種因為 class 導致字體變淺的狀況 */
+p, span, .text-muted {
+  /* 如果有任何 class 企圖把內文變淡，這兩行會強制拉回清晰的深色 */
+  color: #212529 !important;
+  opacity: 1 !important;
 }
 
 *,
@@ -1792,7 +1814,6 @@ progress {
 .table-borderless > :not(:first-child) {
   border-top-width: 0;
 }
-
 .table-striped > tbody > tr:nth-of-type(odd) > * {
   --bs-table-accent-bg: var(--bs-table-striped-bg);
   color: var(--bs-table-striped-color);
@@ -1813,114 +1834,122 @@ progress {
   color: var(--bs-table-hover-color);
 }
 
+/* 🌸 1. 主要表格：飽滿草莓粉底 + 黑色字 */
 .table-primary {
-  --bs-table-color: #000;
-  --bs-table-bg: #cfe2ff;
-  --bs-table-border-color: #bacbe6;
-  --bs-table-striped-bg: #c5d7f2;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #bacbe6;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #bfd1ec;
-  --bs-table-hover-color: #000;
+  --bs-table-color: #000000;
+  --bs-table-bg: #ffbcd8;
+  --bs-table-border-color: rgba(255, 0, 151, 0.3);
+  --bs-table-striped-bg: #ffa6cb;
+  --bs-table-striped-color: #000000;
+  --bs-table-active-bg: #ff91be;
+  --bs-table-active-color: #000000;
+  --bs-table-hover-bg: #ff9cc7;
+  --bs-table-hover-color: #000000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
 }
 
+/* 🌸 2. 次要表格：浪漫薰衣草粉紫底 + 黑色字 */
 .table-secondary {
-  --bs-table-color: #000;
-  --bs-table-bg: #e2e3e5;
-  --bs-table-border-color: #cbccce;
-  --bs-table-striped-bg: #d7d8da;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #cbccce;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #d1d2d4;
-  --bs-table-hover-color: #000;
+  --bs-table-color: #000000;
+  --bs-table-bg: #fecfef;
+  --bs-table-border-color: #ffbcd8;
+  --bs-table-striped-bg: #f5c2eb;
+  --bs-table-striped-color: #000000;
+  --bs-table-active-bg: #ffd0d6;
+  --bs-table-active-color: #000000;
+  --bs-table-hover-bg: #fca8e1;
+  --bs-table-hover-color: #000000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
 }
 
+/* 🌸 3. 成功表格：輕柔櫻花粉底 + 黑色字 */
 .table-success {
-  --bs-table-color: #000;
-  --bs-table-bg: #d1e7dd;
-  --bs-table-border-color: #bcd0c7;
-  --bs-table-striped-bg: #c7dbd2;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #bcd0c7;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #c1d6cc;
-  --bs-table-hover-color: #000;
+  --bs-table-color: #000000;
+  --bs-table-bg: #ffe5e8;
+  --bs-table-border-color: #ffbcd8;
+  --bs-table-striped-bg: #ffdcd1;
+  --bs-table-striped-color: #000000;
+  --bs-table-active-bg: #ffb5be;
+  --bs-table-active-color: #000000;
+  --bs-table-hover-bg: #ffa1ac;
+  --bs-table-hover-color: #000000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
 }
 
+/* 🌸 4. 資訊表格：透亮奶粉藍底 + 黑色字 */
 .table-info {
-  --bs-table-color: #000;
-  --bs-table-bg: #cff4fc;
-  --bs-table-border-color: #badce3;
-  --bs-table-striped-bg: #c5e8ef;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #badce3;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #bfe2e9;
-  --bs-table-hover-color: #000;
+  --bs-table-color: #000000;
+  --bs-table-bg: #f0f3ff;
+  --bs-table-border-color: rgba(255, 0, 151, 0.3);
+  --bs-table-striped-bg: #e3e8ff;
+  --bs-table-striped-color: #000000;
+  --bs-table-active-bg: #d1d8ff;
+  --bs-table-active-color: #000000;
+  --bs-table-hover-bg: #c2ccff;
+  --bs-table-hover-color: #000000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
 }
 
+/* 🌸 5. 警告表格：暖心香草黃粉底 + 黑色字 */
 .table-warning {
-  --bs-table-color: #000;
-  --bs-table-bg: #fff3cd;
-  --bs-table-border-color: #e6dbb9;
-  --bs-table-striped-bg: #f2e7c3;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #e6dbb9;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #ece1be;
-  --bs-table-hover-color: #000;
+  --bs-table-color: #000000;
+  --bs-table-bg: #fffce6;
+  --bs-table-border-color: #ffbcd8;
+  --bs-table-striped-bg: #fdf8cc;
+  --bs-table-striped-color: #000000;
+  --bs-table-active-bg: #f7efa6;
+  --bs-table-active-color: #000000;
+  --bs-table-hover-bg: #f4ea8a;
+  --bs-table-hover-color: #000000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
 }
 
+/* 🌸 6. 危險表格：濃郁草莓醬紅底 + 黑色字 */
 .table-danger {
-  --bs-table-color: #000;
-  --bs-table-bg: #f8d7da;
+  --bs-table-color: #000000;
+  --bs-table-bg: #ffcbd2;
   --bs-table-border-color: #dfc2c4;
-  --bs-table-striped-bg: #eccccf;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #dfc2c4;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #e5c7ca;
-  --bs-table-hover-color: #000;
+  --bs-table-striped-bg: #ffa8b3;
+  --bs-table-striped-color: #000000;
+  --bs-table-active-bg: #ff8595;
+  --bs-table-active-color: #000000;
+  --bs-table-hover-bg: #ff94a2;
+  --bs-table-hover-color: #000000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
 }
 
+/* 🌸 7. 淺色表格：絲滑草莓牛奶白底 + 黑色字 */
 .table-light {
-  --bs-table-color: #000;
-  --bs-table-bg: #f8f9fa;
-  --bs-table-border-color: #dfe0e1;
-  --bs-table-striped-bg: #ecedee;
-  --bs-table-striped-color: #000;
-  --bs-table-active-bg: #dfe0e1;
-  --bs-table-active-color: #000;
-  --bs-table-hover-bg: #e5e6e7;
-  --bs-table-hover-color: #000;
+  --bs-table-color: #212529; /* 使用深碳黑，在白底上更有質感 */
+  --bs-table-bg: #fff5f6;
+  --bs-table-border-color: rgba(255, 0, 151, 0.3);
+  --bs-table-striped-bg: #fde8eb;
+  --bs-table-striped-color: #212529;
+  --bs-table-active-bg: #ffe5e8;
+  --bs-table-active-color: #000000;
+  --bs-table-hover-bg: #ffd0d6;
+  --bs-table-hover-color: #000000;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
 }
 
+/* 🌸 8. 深色表格：高級黑巧可可底 + 櫻花粉紅字（暗色專用高對比） */
 .table-dark {
-  --bs-table-color: #fff;
-  --bs-table-bg: #212529;
-  --bs-table-border-color: #373b3e;
-  --bs-table-striped-bg: #2c3034;
-  --bs-table-striped-color: #fff;
-  --bs-table-active-bg: #373b3e;
-  --bs-table-active-color: #fff;
-  --bs-table-hover-bg: #323539;
-  --bs-table-hover-color: #fff;
+  --bs-table-color: #ffe5e8;
+  --bs-table-bg: #2d2224;
+  --bs-table-border-color: rgba(255, 0, 151, 0.3);
+  --bs-table-striped-bg: #382c2e;
+  --bs-table-striped-color: #ffffff;
+  --bs-table-active-bg: #4a3f41;
+  --bs-table-active-color: #ffffff;
+  --bs-table-hover-bg: #413537;
+  --bs-table-hover-color: #ffffff;
   color: var(--bs-table-color);
   border-color: var(--bs-table-border-color);
 }
@@ -2019,34 +2048,42 @@ progress {
   cursor: pointer;
 }
 .form-control:focus {
+  /* 🌟 核心：點擊輸入框時，文字依然維持清晰的深碳黑 */
   color: #212529;
-  background-color: #fff;
-  border-color: #86b7fe;
+  /* 🥛 點擊時的輸入框背景，換成超淡的草莓牛奶粉白底 */
+  background-color: #fff9fa;
+  /* 🎀 點擊時的邊框，換成明顯的草莓粉紅 */
+  border-color: #ff9a9e;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  /* ✨ 點擊時外圍的光暈（對比 image_826ee2.png 慘痛經驗，這裡用粉紅光暈，字依然是黑的） */
+  box-shadow: 0 0 0 0.25rem rgba(255, 117, 140, 0.25);
 }
 .form-control::-webkit-date-and-time-value {
   height: 1.5em;
 }
+/* ✍️ 提示字（Placeholder）強制加深，改成明顯的深灰，絕不隱形 */
 .form-control::-moz-placeholder {
-  color: #6c757d;
+  color: #554d4f;
   opacity: 1;
 }
 .form-control::placeholder {
-  color: #6c757d;
+  color: #554d4f;
   opacity: 1;
 }
+/* 🔒 當輸入框被禁用（Disabled）時的樣式：淡淡的豆沙粉底 */
 .form-control:disabled {
-  background-color: #e9ecef;
+  background-color: #fcecef;
+  color: #a1888b;
   opacity: 1;
 }
+/* 📁 上傳檔案按鈕的樣式改裝 */
 .form-control::file-selector-button {
   padding: 0.75rem 1rem;
   margin: -0.75rem -1rem;
   -webkit-margin-end: 1rem;
-          margin-inline-end: 1rem;
-  color: #212529;
-  background-color: #e9ecef;
+  margin-inline-end: 1rem;
+  color: #212529; /* 按鈕文字依然是深色 */
+  background-color: #ffe5e8; /* 按鈕背景改成溫柔櫻花粉 */
   pointer-events: none;
   border-color: inherit;
   border-style: solid;
@@ -2060,8 +2097,9 @@ progress {
     transition: none;
   }
 }
+/* 🖱️ 滑鼠移到上傳檔案按鈕時：變成稍微深一點點的棉花糖粉 */
 .form-control:hover:not(:disabled):not([readonly])::file-selector-button {
-  background-color: #dde0e3;
+  background-color: #ffd0d6;
 }
 
 .form-control-plaintext {
@@ -2070,9 +2108,10 @@ progress {
   padding: 0.75rem 0;
   margin-bottom: 0;
   line-height: 1.5;
-  color: #212529;
+  color: #212529; /* 純文字輸入框依然維持深黑 */
   background-color: transparent;
   border: solid transparent;
+}
   border-width: 1px 0;
 }
 .form-control-plaintext:focus {
@@ -2168,9 +2207,9 @@ textarea.form-control-lg {
   }
 }
 .form-select:focus {
-  border-color: #86b7fe;
+  border-color: #ffbcd8;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(255, 0, 151, 0.3);
 }
 .form-select[multiple], .form-select[size]:not([size="1"]) {
   padding-right: 1rem;
@@ -2247,24 +2286,33 @@ textarea.form-control-lg {
 .form-check-input:active {
   filter: brightness(90%);
 }
+/* 🎯 點擊（聚焦）核取方塊時：換上漂亮的粉紅光暈 */
 .form-check-input:focus {
-  border-color: #86b7fe;
+  border-color: #ff9a9e;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(255, 117, 140, 0.25);
 }
+
+/* 🌸 當方塊被勾選時：換成清晰、顯眼的草莓粉紅背景 */
 .form-check-input:checked {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #ff758c;
+  border-color: #ff758c;
 }
+
+/* 🗹 核取方塊勾選後的樣式：維持原本的白色勾勾（%23fff），在草莓紅底上超清晰 */
 .form-check-input:checked[type=checkbox] {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='m6 10 3 3 6-6'/%3e%3c/svg%3e");
 }
+
+/* ⦿ 單選鈕勾選後的樣式：維持原本的白色圓點（%23fff），對比極高 */
 .form-check-input:checked[type=radio] {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e");
 }
+
+/* ➖ 全選方塊處於「第三種狀態（部分選取）」時：同步換上草莓粉紅底與白色橫線 */
 .form-check-input[type=checkbox]:indeterminate {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: #ff758c;
+  border-color: #ff758c;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
 }
 .form-check-input:disabled {
@@ -2338,10 +2386,10 @@ textarea.form-control-lg {
   outline: 0;
 }
 .form-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(255, 0, 151, 0.3);
 }
 .form-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(255, 0, 151, 0.3);
 }
 .form-range::-moz-focus-outer {
   border: 0;
@@ -10838,10 +10886,22 @@ textarea.form-control-lg {
   font-size: 4.5rem;
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* 從下方 20px 的位置開始 */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);    /* 回到原本的位置 */
+  }
+}
+
 header.masthead {
   position: relative;
   background-color: #343a40;
-  background: url("../assets/img/bg-masthead.jpg") no-repeat center center;
+  background-image: url("../assets/img/meme.jpg");
+  background-position: center center;
   background-size: cover;
   padding-top: 8rem;
   padding-bottom: 8rem;
@@ -10856,12 +10916,20 @@ header.masthead:before {
   left: 0;
   opacity: 0.5;
 }
-header.masthead h1, header.masthead .h1 {
+header.masthead h1, header.masthead .h1, header.masthead form {
   font-size: 2rem;
+
+animation: fadeInUp 1s ease-out forwards;
 }
+
+header.masthead form {
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
 @media (min-width: 768px) {
   header.masthead {
-    padding-top: 12rem;
+    padding-top: 26rem;
     padding-bottom: 12rem;
   }
   header.masthead h1, header.masthead .h1 {
@@ -10905,7 +10973,7 @@ header.masthead h1, header.masthead .h1 {
 .call-to-action:before {
   content: "";
   position: absolute;
-  background-color: #1c375e;
+  background-color: #ffbcd8;
   height: 100%;
   width: 100%;
   top: 0;
